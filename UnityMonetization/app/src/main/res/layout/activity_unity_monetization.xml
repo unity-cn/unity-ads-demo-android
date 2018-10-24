@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/unity_monetization_layout_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
+    android:fitsSystemWindows="true"
+    android:gravity="center_horizontal|bottom"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:id="@+id/sv_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textColor="@android:color/white" />
+    </ScrollView>
+
+    <EditText
+        android:id="@+id/et_game_id"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColor="@android:color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_debug_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:padding="5dp"
+            android:text="Debug Mode" />
+
+        <CheckBox
+            android:id="@+id/cb_test_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:padding="5dp"
+            android:text="Test Mode" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_init"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:text="Initialize"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_show_skippable_video_ad"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:text="Show Interstitial"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_show_rewarded_video_ad"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:text="Show Rewarded"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_show_banner_ad"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:text="Show Banner"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_show_promo"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:text="Show Promo"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_show_info"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:text="Show Info"
+        android:textAllCaps="false" />
+</LinearLayout>
