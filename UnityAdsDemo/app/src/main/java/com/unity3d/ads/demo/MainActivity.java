@@ -18,13 +18,17 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.unity3d.ads.IUnityAdsInitializationListener;
 import com.unity3d.ads.IUnityAdsListener;
 import com.unity3d.ads.UnityAds;
 
-public class MainActivity extends AppCompatActivity implements IUnityAdsListener, View.OnClickListener {
-    private static final String DEFAULT_GAME_ID = "";
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class MainActivity extends AppCompatActivity implements IUnityAdsListener, View.OnClickListener, IUnityAdsInitializationListener {
+    private static final String DEFAULT_GAME_ID = "14851";
     private static final String TAG_UNITY_ADS_DEMO = "UnityAdsDemo";
-    private static final String PLACEMENT_ID_SKIPPABLE_VIDEO = "skippableVideo";
+    private static final String PLACEMENT_ID_SKIPPABLE_VIDEO = "video";
     private static final String PLACEMENT_ID_REWARDED_VIDEO = "rewardedVideo";
 
     private ScrollView mSvContainer;
@@ -91,7 +95,8 @@ public class MainActivity extends AppCompatActivity implements IUnityAdsListener
         mCbTestMode.setEnabled(false);
         mBtnInit.setEnabled(false);
         UnityAds.setDebugMode(mCbDebugMode.isChecked());
-        UnityAds.initialize(this, mGameId, this, mCbTestMode.isChecked());
+        UnityAds.addListener(this);
+        UnityAds.initialize(getApplicationContext(), mGameId, mCbTestMode.isChecked(), this);
     }
 
     private void showSkippableVideoAd() {
@@ -208,5 +213,23 @@ public class MainActivity extends AppCompatActivity implements IUnityAdsListener
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onInitializationComplete() {
+        final Timer AdTimer = new Timer();
+        AdTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(() -> {
+                    showSkippableVideoAd();
+                });
+            }
+        }, 5000);
+    }
+
+    @Override
+    public void onInitializationFailed(UnityAds.UnityAdsInitializationError error, String message) {
+        // Actions after initialization failed
     }
 }
