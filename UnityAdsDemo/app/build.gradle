@@ -23,9 +23,9 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26.0.0'
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    implementation 'com.unity3d.ads:unity-ads:3.7.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.android.support.constraint:constraint-layout:2.0.4'
-    testImplementation 'junit:junit:4.13.1'
-    implementation 'com.unity3d.ads:unity-ads:3.6.0'
+    testImplementation 'junit:junit:4.13.2'
 }

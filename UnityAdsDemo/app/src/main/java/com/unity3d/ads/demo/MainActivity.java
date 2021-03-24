@@ -3,7 +3,6 @@ package com.unity3d.ads.demo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -18,14 +17,17 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.unity3d.ads.IUnityAdsInitializationListener;
 import com.unity3d.ads.IUnityAdsListener;
+import com.unity3d.ads.IUnityAdsShowListener;
 import com.unity3d.ads.UnityAds;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity implements IUnityAdsListener, View.OnClickListener, IUnityAdsInitializationListener {
+public class MainActivity extends AppCompatActivity implements IUnityAdsListener, View.OnClickListener, IUnityAdsInitializationListener, IUnityAdsShowListener {
     private static final String DEFAULT_GAME_ID = "14851";
     private static final String TAG_UNITY_ADS_DEMO = "UnityAdsDemo";
     private static final String PLACEMENT_ID_SKIPPABLE_VIDEO = "video";
@@ -107,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements IUnityAdsListener
         showLog("begin to show skippable video ad.", Color.GREEN, false);
         mBtnShowSkippableVideoAd.setEnabled(false);
         mBtnShowRewardedVideoAd.setEnabled(false);
-        UnityAds.show(this, PLACEMENT_ID_SKIPPABLE_VIDEO);
+        UnityAds.show(this, PLACEMENT_ID_SKIPPABLE_VIDEO, this);
     }
 
     private void showRewardedVideoAd() {
@@ -118,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements IUnityAdsListener
         showLog("begin to show rewarded video ad.", Color.GREEN, false);
         mBtnShowSkippableVideoAd.setEnabled(false);
         mBtnShowRewardedVideoAd.setEnabled(false);
-        UnityAds.show(this, PLACEMENT_ID_REWARDED_VIDEO);
+        UnityAds.show(this, PLACEMENT_ID_REWARDED_VIDEO, this);
     }
 
     private void showInfo() {
@@ -230,6 +232,26 @@ public class MainActivity extends AppCompatActivity implements IUnityAdsListener
 
     @Override
     public void onInitializationFailed(UnityAds.UnityAdsInitializationError error, String message) {
-        // Actions after initialization failed
+        showLog(String.format("onInitializationFailed. Error: %s, message: %s", error.toString(), message), Color.RED, true);
+    }
+
+    @Override
+    public void onUnityAdsShowFailure(String placementId, UnityAds.UnityAdsShowError error, String message) {
+        showLog(String.format("onUnityAdsShowFailure. Placement: %s, Error: %s, message: %s", placementId, error.toString(), message), Color.RED, true);
+    }
+
+    @Override
+    public void onUnityAdsShowStart(String placementId) {
+        showLog(String.format("onUnityAdsShowStart. Placement: %s", placementId), Color.WHITE, false);
+    }
+
+    @Override
+    public void onUnityAdsShowClick(String placementId) {
+        showLog(String.format("onUnityAdsShowClick. Placement: %s", placementId), Color.WHITE, false);
+    }
+
+    @Override
+    public void onUnityAdsShowComplete(String placementId, UnityAds.UnityAdsShowCompletionState state) {
+        showLog(String.format("onUnityAdsShowComplete. Placement: %s, State: %s", placementId, state.toString()), Color.WHITE, false);
     }
 }
